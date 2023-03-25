@@ -60,8 +60,12 @@ public class RSA {
         return c.modPow(secretKey.getD(),secretKey.getP().multiply(secretKey.getQ()));
     }
 
-    public BigInteger dechiffrementRsa(BigInteger c,BigInteger d, BigInteger N){
+    public static BigInteger dechiffrementRsa(BigInteger c,BigInteger d, BigInteger N){
         return c.modPow(d,N);
+    }
+
+    public static BigInteger chiffrementRsa(BigInteger m,BigInteger e,BigInteger n){
+        return m.modPow(e,n);
     }
     /*
     def keyGenRSA(bit : int ) -> tuple[tuple[int,int], int]:
