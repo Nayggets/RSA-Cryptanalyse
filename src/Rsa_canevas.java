@@ -589,12 +589,5 @@ class Rsa_canevas {
         BigInteger[] inter8 = calculatePandQWithD(D8,E8,N8);
         assert (inter8[0].multiply(inter8[1]).equals(N8));
         System.out.println("P == " +inter8[0] + "  Q == " + inter8[1]);
-
     }
-
-
-
-
-
-
 }
