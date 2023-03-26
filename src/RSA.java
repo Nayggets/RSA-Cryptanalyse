@@ -67,31 +67,12 @@ public class RSA {
     public static BigInteger chiffrementRsa(BigInteger m,BigInteger e,BigInteger n){
         return m.modPow(e,n);
     }
-    /*
-    def keyGenRSA(bit : int ) -> tuple[tuple[int,int], int]:
-        premiers = deuxGrandPremier(bit)
-        n = premiers[0] * premiers[1]
-        phi = (premiers[0]-1)*(premiers[1]-1)
-        e = random.randint(1,phi)
-        while Euclide(e,phi) != 1:
-            e = random.randint(1,phi)
-        d = Euclide_Etendu(e,phi)[1]
-        while d < 0:
-            e = random.randint(1, phi)
-            while Euclide(e, phi) != 1:
-                e = random.randint(1, phi)
-            d = Euclide_Etendu(e, phi)[1]
 
-        return (n,e),(d)
+    public SecretKey getSecretKey() {
+        return secretKey;
+    }
 
 
-def chiffrementRSA(m : int, publicKey : tuple[int,int]) -> int:
-    return exponentiation_modulaire(m,publicKey[1],publicKey[0])
-
-def dechiffrementRSA(c : int , privatekey : tuple[int,int]):
-    return exponentiation_modulaire(c,privatekey[1],privatekey[0])
-
-     */
 
 
     public static BigInteger euclide(BigInteger a, BigInteger b) {
@@ -130,46 +111,6 @@ def dechiffrementRSA(c : int , privatekey : tuple[int,int]):
         return result;
     }
 
-    public static BigInteger[] generateClePublique(BigInteger p, BigInteger q) {
-        BigInteger n = p.multiply(q);
-        BigInteger phi = p.subtract(BigInteger.ONE).multiply(q.subtract(BigInteger.ONE));
-        BigInteger e = BigInteger.valueOf(2);
-        while (e.compareTo(phi) < 0) {
-            if (euclide(e, phi).equals(BigInteger.ONE)) {
-                break;
-            } else {
-                e = e.add(BigInteger.ONE);
-            }
-        }
-        BigInteger[] clePublique = {e, n};
-        return clePublique;
-    }
 
-    public static BigInteger[] generateClePrivee(BigInteger p, BigInteger q, BigInteger e) {
-        BigInteger n = p.multiply(q);
-        BigInteger phi = p.subtract(BigInteger.ONE).multiply(q.subtract(BigInteger.ONE));
-        BigInteger[] result = euclideEtendu(e, phi);
-        BigInteger d = result[1];
-        if (d.compareTo(BigInteger.ZERO) < 0) {
-            d = d.add(phi);
-        }
-        BigInteger[] clePrivee = {d, n};
-        return clePrivee;
-    }
 
-    public static BigInteger[] chiffrement(BigInteger[] clePublique, BigInteger[] message) {
-        BigInteger[] chiffre = new BigInteger[message.length];
-        for (int i = 0; i < message.length; i++) {
-            chiffre[i] = exponentiationModulaire(message[i], clePublique[0], clePublique[1]);
-        }
-        return chiffre;
-    }
-
-    public static BigInteger[] dechiffrement(BigInteger[] clePrivee, BigInteger[] chiffre) {
-        BigInteger[] message = new BigInteger[chiffre.length];
-        for (int i = 0; i < chiffre.length; i++) {
-            message[i] = exponentiationModulaire(chiffre[i], clePrivee[0], clePrivee[1]);
-        }
-        return message;
-    }
 }

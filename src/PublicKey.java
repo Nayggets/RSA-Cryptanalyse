@@ -6,7 +6,7 @@ public class PublicKey {
 
     public PublicKey(BigInteger e, BigInteger n) {
         this.e = e;
-        N = n;
+        this.N = n;
     }
 
 
